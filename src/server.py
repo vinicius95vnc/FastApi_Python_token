@@ -12,7 +12,7 @@ criar_bd()
 
 app = FastAPI()
 
-# CORS
+# CORS conexão
 origins = ['http://localhost:3000',
            'http://lojagarage70s.com',
            'http://lojagarage70s.com.br']
@@ -23,7 +23,7 @@ app.add_middleware(CORSMiddleware,
                    allow_methods=["*"],
                    allow_headers=["*"],)
 
-# CLIENTES
+# ROTA CLIENTES
 @app.post('/clientes', status_code=status.HTTP_201_CREATED, response_model=Cliente)
 def cadastrar_cliente(cliente: Cliente, db: Session = Depends(get_db)):
     cliente_cadastrado = RepositorioCliente(db).criar(cliente)
@@ -44,7 +44,7 @@ def remover_cliente(id: int, db: Session = Depends(get_db)):
     RepositorioCliente(db).remover(id)
     return
 
-# USUARIOS
+# ROTA USUARIOS
 @app.post('/usuarios', status_code=status.HTTP_201_CREATED, response_model=Usuario)
 def cadastrar_Usuario(usuario: Usuario, db: Session = Depends(get_db)):
     usuario_cadastrado = RepositorioUsuario(db).criar(usuario)
@@ -65,7 +65,7 @@ def remover_usuario(id: int, db: Session = Depends(get_db)):
     RepositorioUsuario(db).remover(id)
     return
 
-# PRODUTOS
+# ROTA PRODUTOS
 @app.post('/produtos', status_code=status.HTTP_201_CREATED, response_model=Produto)
 def criar_produto(produto: Produto, db: Session = Depends(get_db)):
     produto_criado = RepositorioProduto(db).criar(produto)
@@ -86,7 +86,7 @@ def remover_produto(id: int, db: Session = Depends(get_db)):
     RepositorioProduto(db).remover(id)
     return
 
-# MOTOS
+# ROTA MOTOS
 @app.post('/motos', status_code=status.HTTP_201_CREATED, response_model=Moto)
 def Cadastrar_moto(moto: Moto, db: Session = Depends(get_db)):
     moto_cadastrada = RepositorioMotos(db).criar(moto)
